@@ -5,7 +5,6 @@ use App\Repository\PedidosRepository;
 use DateTime;
 use DateTimeInterface;
 use DateTimeZone;
-use Doctrine\DBAL\Types\DecimalType;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: PedidosRepository::class)]
@@ -26,7 +25,7 @@ class Pedidos{
     private ?DetallePedido $detalle = null;
     #[ORM\ManyToOne(inversedBy: 'pedidos')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Cliente $cliente = null;
+    private ?Usuario $usuario = null;
     
 
     
@@ -53,8 +52,8 @@ class Pedidos{
     public function getTotal(): ?string{
         return $this->total;
     }
-    public function getCliente(): ?Cliente{
-        return $this->cliente;
+    public function getCliente(): ?Usuario{
+        return $this->usuario;
     }
     public function getDetalle(): ?DetallePedido{
         return $this->detalle;
@@ -79,8 +78,8 @@ class Pedidos{
         $this->fecha_pedido = $fecha_pedido;
         return $this;
     }
-    public function setCliente(Cliente $cliente): static{
-        $this->cliente = $cliente;
+    public function setCliente(Usuario $usuario): static{
+        $this->usuario = $usuario;
         return $this;
     }
     

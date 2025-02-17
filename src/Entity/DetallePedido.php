@@ -17,9 +17,9 @@ class DetallePedido{
     #[ORM\OneToOne(targetEntity: Pedidos::class)]
     #[ORM\JoinColumn(name: "id_pedido" ,referencedColumnName: "id_pedido")]
     private ?Pedidos $id_pedido = null;
-    #[ORM\OneToOne(targetEntity: Productos::class)]
+    #[ORM\OneToOne(targetEntity: Producto::class)]
     #[ORM\JoinColumn(name: "id_producto" ,referencedColumnName: "id_producto")]
-    private ?Productos $id_producto = null;
+    private ?Producto $id_producto = null;
 
     public function __construct($cantidad, $precio_unitario)
     {
