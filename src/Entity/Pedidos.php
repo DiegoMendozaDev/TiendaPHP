@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Entity;
 
 use App\Repository\PedidosRepository;
@@ -7,28 +8,30 @@ use DateTimeInterface;
 use DateTimeZone;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+
 #[ORM\Entity(repositoryClass: PedidosRepository::class)]
-class Pedidos{
+class Pedidos
+{
     #[ORM\id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id_pedido = null;
-    #[ORM\Column(length : 255)]
+    #[ORM\Column(length: 255)]
     private ?string $title = null;
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?DateTimeInterface $fecha_pedido = null;
-    #[ORM\Column(length:50)]
+    #[ORM\Column(length: 50)]
     private ?string $estado = null;
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?string $total = null;
-    #[ORM\OneToOne(mappedBy:'pedidos', targetEntity: DetallePedido::class)]
+    #[ORM\OneToOne(mappedBy: 'pedidos', targetEntity: DetallePedido::class)]
     private ?DetallePedido $detalle = null;
     #[ORM\ManyToOne(inversedBy: 'pedidos')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Usuario $usuario = null;
-    
 
-    
+
+
     public function __construct($title, $estado, $total)
     {
         $this->title = $title;
@@ -36,53 +39,63 @@ class Pedidos{
         $this->estado = $estado;
         $this->total = $total;
     }
-    
-    public function getId(): ?int{
+
+    public function getId(): ?int
+    {
         return $this->id_pedido;
     }
-    public function getTitle(): ?string{
+    public function getTitle(): ?string
+    {
         return $this->title;
     }
-    public function getFecha_Pedido(): ?\DateTimeInterface{
+    public function getFecha_Pedido(): ?\DateTimeInterface
+    {
         return $this->fecha_pedido;
     }
-    public function getEstado(): ?string{
+    public function getEstado(): ?string
+    {
         return $this->estado;
     }
-    public function getTotal(): ?string{
+    public function getTotal(): ?string
+    {
         return $this->total;
     }
-    public function getCliente(): ?Usuario{
+    public function getCliente(): ?Usuario
+    {
         return $this->usuario;
     }
-    public function getDetalle(): ?DetallePedido{
+    public function getDetalle(): ?DetallePedido
+    {
         return $this->detalle;
     }
-    public function setDetalle(DetallePedido $detalle): static{
+    public function setDetalle(DetallePedido $detalle): static
+    {
         $this->detalle = $detalle;
         return $this;
     }
-    public function setTitle(string $title): static{
+    public function setTitle(string $title): static
+    {
         $this->title = $title;
         return $this;
     }
-    public function setEstado(string $estado): static{
+    public function setEstado(string $estado): static
+    {
         $this->estado = $estado;
         return $this;
     }
-    public function setTotal(string $total): static{
+    public function setTotal(string $total): static
+    {
         $this->total = $total;
         return $this;
     }
-    public function setFecha_Pedido(\DateTimeInterface $fecha_pedido): static{
+    public function setFecha_Pedido(\DateTimeInterface $fecha_pedido): static
+    {
         $this->fecha_pedido = $fecha_pedido;
         return $this;
     }
-    public function setCliente(Usuario $usuario): static{
+    public function setCliente(Usuario $usuario): static
+    {
         $this->usuario = $usuario;
         return $this;
     }
-    
-
 }
-?>
