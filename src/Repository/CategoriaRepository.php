@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Categoria;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry;
 
 class CategoriaRepository extends ServiceEntityRepository{
 

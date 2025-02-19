@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Categoria;
 use App\Entity\Producto;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -10,9 +11,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 
 
-#[Route('/api', name:'api_')]
-class ProductoControlle extends AbstractController{
-    #[Route('/productos', name:'_productos', methods: ['get'])]
+#[Route('/api/productos', name:'api_productos')]
+class ProductoController extends AbstractController{
+    #[Route('/ver', name:'_ver', methods: ['get'])]
     public function index(EntityManagerInterface $entityManager): JsonResponse{
         $productos = $entityManager->getRepository(Producto::class)
         ->findAll();
@@ -23,7 +24,7 @@ class ProductoControlle extends AbstractController{
                         'descripcion' => $producto->getDescripcion(),
                         'precio' => $producto->getPrecio(),
                         'marca' => $producto->getMarca(),
-                        'detalle' => $producto->getDetalle(),
+                        'id_categoria' => $producto->getCategoria(),
                         'foto' => $producto->getFoto(),
                         'stock' => $producto->getStock()
         ];
@@ -41,6 +42,8 @@ class ProductoControlle extends AbstractController{
         $producto->setDescripcion($data['descripcion']);
         $producto->setPrecio($data['precio']);
         $producto->setMarca($data['marca']);
+        $categoria = $entityManager->getRepository(Categoria::class)->find($data['id_categoria']);
+        $producto->setCategoria($categoria);
         $producto->setFoto($data['foto']);
         $producto->setStock($data['stock']);
         $entityManager->persist($producto);
@@ -50,6 +53,7 @@ class ProductoControlle extends AbstractController{
             'nombre' => $producto->getNombre(),
             'descripcion' => $producto->getDescripcion(),
             'precio' => $producto->getPrecio(),
+            'id_categoria' => $producto->getCategoria(),
             'marca' => $producto->getMarca(),
             'foto' => $producto->getFoto(),
             'stock' => $producto->getStock(),
@@ -69,6 +73,8 @@ class ProductoControlle extends AbstractController{
         $producto->setNombre($data['nombre']);
         $producto->setDescripcion($data['descripcion']);
         $producto->setPrecio($data['precio']);
+        $categoria = $entityManager->getRepository(Categoria::class)->find($data['id_categoria']);
+        $producto->setCategoria($categoria);
         $producto->setMarca($data['marca']);
         $producto->setFoto($data['foto']);
         $producto->setStock($data['stock']);

@@ -24,7 +24,16 @@ class Categoria{
 
     #[ORM\Column(type: "text", nullable: true)]
     private ?string $descripcion = null;
-
+    public function getProductos(): Collection{
+        return $this->productos;
+    }
+    public function setProductos(Producto $producto): static{
+        if(!$this->productos->contains($producto)){
+            $this->productos->add($producto);
+            $producto->setCategoria($this);
+        }
+        return $this;
+    }
     public function getId(): int
     {
         return $this->id_categoria;
