@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CategoriaRepository;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -14,6 +15,9 @@ class Categoria{
     #[ORM\GeneratedValue()]
     #[ORM\Column(type: "integer")]
     private ?int $id_categoria=null;
+
+    #[ORM\OneToMany(targetEntity: Producto::class, mappedBy:"categoria")]
+    private Collection $productos;
 
     #[ORM\Column(type: "string", length: 100)]
     private ?string $nombre = null;

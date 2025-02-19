@@ -11,6 +11,10 @@ class Producto{
     #[ORM\Column(type: 'integer')]
     private ?int $id_producto = null;
 
+    #[ORM\ManyToOne(targetEntity: Categoria::class)]
+    #[ORM\JoinColumn(name: 'id_categoria', referencedColumnName: "id_categoria")]
+    private ?Categoria $categoria = null;
+
     #[ORM\Column(type: "string", length: 150)]
     private ?string $nombre = null;
 
@@ -30,7 +34,6 @@ class Producto{
     private ?int $stock = null;
 
 
-
     public function getId(): int
     {
         return $this->id_producto;
@@ -42,6 +45,15 @@ class Producto{
     public function setNombre(string $nombre): static
     {
         $this->nombre = $nombre;
+        return $this;
+    }
+    public function getCategoria(): ?Categoria
+    {
+        return $this->categoria;
+    }
+    public function setCategoria(?Categoria $categoria): static
+    {
+        $this->categoria = $categoria;
         return $this;
     }
     public function getDescripcion(): string

@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\UsuariosRespository;
+use App\Repository\UsuarioRespository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORm\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-#[ORM\Entity(repositoryClass: UsuariosRespository::class)]
+#[ORM\Entity(repositoryClass: UsuarioRespository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
