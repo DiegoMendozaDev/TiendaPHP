@@ -11,13 +11,14 @@
         "doctrine/doctrine-bundle": "^2.13.2",
         "doctrine/doctrine-migrations-bundle": "^3.4.1",
         "doctrine/orm": "^2.16",
-        "doctrine/persistence": "^2.2",
+        "doctrine/persistence": "^3.1",
         "symfony/console": "7.2.*",
         "symfony/dotenv": "7.2.*",
         "symfony/flex": "^2.4.7",
         "symfony/framework-bundle": "7.2.*",
         "symfony/runtime": "7.2.*",
         "symfony/security-bundle": "7.2.*",
+        "symfony/validator": "7.2",
         "symfony/yaml": "7.2.*"
     },
     "config": {

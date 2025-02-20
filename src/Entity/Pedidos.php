@@ -6,6 +6,8 @@ use App\Repository\PedidosRepository;
 use DateTime;
 use DateTimeInterface;
 use DateTimeZone;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -24,8 +26,8 @@ class Pedidos
     private ?string $estado = null;
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?string $total = null;
-    #[ORM\OneToOne(mappedBy: 'pedidos', targetEntity: DetallePedido::class)]
-    private ?DetallePedido $detalle = null;
+    #[ORM\OneToMany(targetEntity: DetallePedido::class, mappedBy: 'pedido')]
+    private ?Collection $detalles = null;
     #[ORM\ManyToOne(inversedBy: 'pedidos')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Usuario $usuario = null;
@@ -34,6 +36,7 @@ class Pedidos
 
     public function __construct($title, $estado, $total)
     {
+        $this->detalles = new ArrayCollection();
         $this->title = $title;
         $this->fecha_pedido = new DateTime('now', new DateTimeZone('Europe/Madrid'));
         $this->estado = $estado;
@@ -64,13 +67,13 @@ class Pedidos
     {
         return $this->usuario;
     }
-    public function getDetalle(): ?DetallePedido
+    public function getDetalle(): ?Collection
     {
-        return $this->detalle;
+        return $this->detalles;
     }
-    public function setDetalle(DetallePedido $detalle): static
+    public function addDetalle(DetallePedido $detalle): static
     {
-        $this->detalle = $detalle;
+        $this->detalles = $detalle;
         return $this;
     }
     public function setTitle(string $title): static

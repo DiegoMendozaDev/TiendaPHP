@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 
 #[Route('/api', name:'api_')]
-class ProductoControlle extends AbstractController{
+class ProductoController extends AbstractController{
     #[Route('/productos', name:'_productos', methods: ['get'])]
     public function index(EntityManagerInterface $entityManager): JsonResponse{
         $productos = $entityManager->getRepository(Producto::class)
