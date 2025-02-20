@@ -6,6 +6,7 @@ use App\Entity\DetallePedido;
 use App\Entity\Pedidos;
 use App\Entity\Producto;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\Entity;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -36,7 +37,7 @@ class DetalleController extends AbstractController {
         $detalle = new DetallePedido();
         $pedido = $entityManager->getRepository(Pedidos::class)->find($data['id_pedido']);
         $producto = $entityManager->getRepository(Producto::class)->find($data['id_producto']);
-        $detalle->setId_pedido($pedido);
+        $detalle->setPedido($pedido);
         $detalle->setId_producto($producto);
         $detalle->setCantidad($data['cantidad']);
         $detalle->setPrecio_Unitario($data['precio_unitario']);
@@ -44,19 +45,41 @@ class DetalleController extends AbstractController {
         $entityManager->flush();
         $data = [
             'id' => $detalle->getId_Detalle(),
-            'id_pedido' => $detalle->getId_pedido(),
+            'id_pedido' => $detalle->getPedido(),
             'id_producto' => $detalle->getId_producto(),
             'cantidad' => $detalle->getCantidad(),
             'precio_unitario' => $detalle->getPrecio_Unitario()
         ];
         return $this->json($data, 201);
     }
-    #[Route('/update', name:'_update', methods: ['put, patch'])]
+    #[Route('/update{id}', name:'_update', methods: ['put, patch'])]
     public function update(EntityManagerInterface $entityManager, Request $request, int $id): JsonResponse{
-        $detalle = json_decode($request->getContent(), true);
+        $detalle = $entityManager->getRepository(DetallePedido::class)->find($id);
         if(!$detalle){
-            return $this->json(["detalle" => "Error: no existe detalle"]);
+            return $this->json(["detalle" => "Error: "]);
         }
-        
+        $data = json_decode($request->getContent(), true);
+        if(!isset($data['id_pedido']) ||!isset($data['id_producto'])){
+            return $this->json(["detalle" => "Error: Invalid data"]);
+        }
+        $pedido = $entityManager->getRepository(Pedidos::class)->find($data['id_pedido']);
+        $producto = $entityManager->getRepository(Producto::class)->find($data['id_producto']);
+        $detalle->setPedido($pedido);
+        $detalle->setId_producto($producto);
+        $detalle->setCantidad($data['cantidad']);
+        $detalle->getPrecio_Unitario($data['precio_unitario']);
+        $entityManager->flush();
+        return $this->json($data, 200);
+
+    }
+    #[Route('/delete/{id}', name : '_delete', methods : ['delete'])]
+    public function delete(EntityManagerInterface $entityManager, int $id): JsonResponse{
+        $detalle = $entityManager->getRepository(DetallePedido::class)->find($id);
+        if(!$detalle){
+            return $this->json(['Message' => 'Error']);
+        }
+        $entityManager->remove($detalle);
+        $entityManager->flush();
+        return $this->json(['message' => 'Eliminado correctamente el id'. $id]);
     }
 }
