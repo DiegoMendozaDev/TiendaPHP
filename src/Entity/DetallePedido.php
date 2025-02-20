@@ -22,7 +22,7 @@ class DetallePedido
     private ?Pedidos $pedido = null;
     #[ORM\OneToOne(targetEntity: Producto::class)]
     #[ORM\JoinColumn(name: "id_producto", referencedColumnName: "id_producto")]
-    private ?Producto $id_producto = null;
+    private ?Producto $producto = null;
 
    
     public function getId_Detalle(): ?int
@@ -39,7 +39,7 @@ class DetallePedido
     }
     public function getId_producto(): ?int
     {
-        return $this->id_producto;
+        return $this->producto;
     }
     public function getPedido(): ?Pedidos
     {
@@ -55,12 +55,12 @@ class DetallePedido
         $this->precio_unitario = $precio_unitario;
         return $this;
     }
-    public function setId_producto(Producto $id_producto): static
+    public function setProducto(?Producto $producto): static
     {
-        $this->id_producto = $id_producto;
+        $this->producto = $producto;
         return $this;
     }
-    public function setPedido(Pedidos $pedido): static
+    public function setPedido(?Pedidos $pedido): static
     {
         $this->pedido = $pedido;
         return $this;

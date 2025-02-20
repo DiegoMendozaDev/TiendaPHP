@@ -32,8 +32,6 @@ class Pedidos
     #[ORM\JoinColumn(nullable: false)]
     private ?Usuario $usuario = null;
 
-
-
     public function __construct($title, $estado, $total)
     {
         $this->detalles = new ArrayCollection();
@@ -73,8 +71,21 @@ class Pedidos
     }
     public function addDetalle(DetallePedido $detalle): static
     {
-        $this->detalles = $detalle;
+        if(!$this->detalles->contains($detalle)){
+            $this->detalles->add($detalle);
+            $detalle->setPedido($this);
+        }
         return $this;
+    }
+    public function removeDetalle(DetallePedido $detalle): static
+    {
+        if($this->detalles->removeElement($detalle)){
+            if($detalle->getPedido() === $this){
+                $detalle->setPedido(null);
+            }
+        }
+        return $this;
+
     }
     public function setTitle(string $title): static
     {
