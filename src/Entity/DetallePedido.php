@@ -24,11 +24,7 @@ class DetallePedido
     #[ORM\JoinColumn(name: "id_producto", referencedColumnName: "id_producto")]
     private ?Producto $id_producto = null;
 
-    public function __construct($cantidad, $precio_unitario)
-    {
-        $this->cantidad = $cantidad;
-        $this->precio_unitario = $precio_unitario;
-    }
+   
     public function getId_Detalle(): ?int
     {
         return $this->id_detalle;

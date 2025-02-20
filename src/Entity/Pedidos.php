@@ -32,14 +32,6 @@ class Pedidos
 
 
 
-    public function __construct($title, $estado, $total)
-    {
-        $this->title = $title;
-        $this->fecha_pedido = new DateTime('now', new DateTimeZone('Europe/Madrid'));
-        $this->estado = $estado;
-        $this->total = $total;
-    }
-
     public function getId(): ?int
     {
         return $this->id_pedido;
