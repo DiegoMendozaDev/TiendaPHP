@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
+use App\Repository\DetallePedidoRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\DBAL\Types\Types;
 
 
-#[ORM\Entity(RepositoryClass: DetallePedido::class)]
+#[ORM\Entity(repositoryClass: DetallePedidoRepository::class)]
 class DetallePedido
 {
     #[ORM\Id]
