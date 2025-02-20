@@ -22,7 +22,7 @@ class DetallePedido
     #[ORM\ManyToOne(targetEntity: Pedidos::class, inversedBy:"pedido")]
     #[ORM\JoinColumn(name: "id_pedido", referencedColumnName: "id_pedido")]
     private ?Pedidos $pedido = null;
-    #[ORM\OneToOne(targetEntity: Producto::class)]
+    #[ORM\ManyToOne(targetEntity: Producto::class, inversedBy:"producto")]
     #[ORM\JoinColumn(name: "id_producto", referencedColumnName: "id_producto")]
     private ?Producto $producto = null;
 
@@ -39,7 +39,7 @@ class DetallePedido
     {
         return $this->precio_unitario;
     }
-    public function getId_producto(): ?int
+    public function getProducto(): ?Producto
     {
         return $this->producto;
     }

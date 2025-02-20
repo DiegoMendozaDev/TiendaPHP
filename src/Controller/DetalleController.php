@@ -45,7 +45,7 @@ class DetalleController extends AbstractController {
         $data = [
             'id' => $detalle->getId_Detalle(),
             'id_pedido' => $detalle->getPedido(),
-            'id_producto' => $detalle->getId_producto(),
+            'id_producto' => $detalle->getProducto(),
             'cantidad' => $detalle->getCantidad(),
             'precio_unitario' => $detalle->getPrecio_Unitario()
         ];
