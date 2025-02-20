@@ -30,7 +30,7 @@ class PedidoController extends AbstractController {
         }
         return $this->json(['pedidos'=> $data], 200);
     }
-    #[Route('/crear', name: 'crear', methods:['POST'])]
+    #[Route('/create', name: 'crear', methods:['POST'])]
     public function crear(EntityManagerInterface $entityManager, Request $request): JsonResponse
     {
         $data = json_decode($request->getContent(),true);

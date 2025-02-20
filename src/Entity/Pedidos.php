@@ -16,7 +16,7 @@ class Pedidos
 {
     #[ORM\id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer')]
     private ?int $id_pedido = null;
     #[ORM\Column(length: 255)]
     private ?string $title = null;
