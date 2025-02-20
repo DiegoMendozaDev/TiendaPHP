@@ -14,12 +14,10 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: PedidosRepository::class)]
 class Pedidos
 {
-    #[ORM\id]
+    #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private ?int $id_pedido = null;
-    #[ORM\Column(length: 255)]
-    private ?string $title = null;
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?DateTimeInterface $fecha_pedido = null;
     #[ORM\Column(length: 50)]
@@ -28,14 +26,13 @@ class Pedidos
     private ?string $total = null;
     #[ORM\OneToMany(targetEntity: DetallePedido::class, mappedBy: 'pedido')]
     private ?Collection $detalles = null;
-    #[ORM\ManyToOne(inversedBy: 'pedidos')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\ManyToOne(targetEntity:Usuario::class ,inversedBy: 'pedidos')]
+    #[ORM\JoinColumn(name:'id_usuario',referencedColumnName:'id_usuario',nullable: false)]
     private ?Usuario $usuario = null;
 
-    public function __construct($title, $estado, $total)
+    public function __construct($estado, $total)
     {
         $this->detalles = new ArrayCollection();
-        $this->title = $title;
         $this->fecha_pedido = new DateTime('now', new DateTimeZone('Europe/Madrid'));
         $this->estado = $estado;
         $this->total = $total;
@@ -44,10 +41,6 @@ class Pedidos
     public function getId(): ?int
     {
         return $this->id_pedido;
-    }
-    public function getTitle(): ?string
-    {
-        return $this->title;
     }
     public function getFecha_Pedido(): ?\DateTimeInterface
     {
@@ -87,11 +80,7 @@ class Pedidos
         return $this;
 
     }
-    public function setTitle(string $title): static
-    {
-        $this->title = $title;
-        return $this;
-    }
+
     public function setEstado(string $estado): static
     {
         $this->estado = $estado;

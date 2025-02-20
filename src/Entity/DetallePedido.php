@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Entity;
+
+use App\Repository\DetallePedidoRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\DBAL\Types\Types;
 use App\Repository\DetallePedidoRepository;
+
 
 #[ORM\Entity(repositoryClass: DetallePedidoRepository::class)]
 class DetallePedido

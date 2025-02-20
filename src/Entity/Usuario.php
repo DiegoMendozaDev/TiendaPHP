@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UsuarioRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -13,7 +15,7 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column()]
+    #[ORM\Column(type:'integer')]
     private ?int $id_usuario = null;
 
     #[ORM\Column(length: 100)]
@@ -41,6 +43,14 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 20)]
     private ?string $codigo_postal = null;
+
+    #[ORM\OneToMany(targetEntity: Pedidos::class, mappedBy:'pedidos')]
+    private ?Collection $pedidos = null;
+
+    public function __construct()
+    {
+        $this->pedidos = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -139,6 +149,10 @@ class Usuario implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+    public function getPedidos():Collection
+    {
+        return $this->pedidos;
     }
 
 }

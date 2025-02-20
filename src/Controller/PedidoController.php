@@ -34,10 +34,7 @@ class PedidoController extends AbstractController {
     public function crear(EntityManagerInterface $entityManager, Request $request): JsonResponse
     {
         $data = json_decode($request->getContent(),true);
-
-        if(!isset($data['title'])){
-            return $this->json(['Error'=>'Fatal Error'],400);
-        }elseif(!isset($data['estado'])){
+        if(!isset($data['estado'])){
             return $this->json(['Error'=>'Fatal Error'],400);
         }elseif(!isset($data['total'])){
             return $this->json(['Error'=>'Fatal Error'],400);
@@ -45,9 +42,10 @@ class PedidoController extends AbstractController {
             return $this->json(['Error'=>'Fatal Error'],400);
         }
         $usuario = $entityManager->getRepository(Usuario::class)->find($data['id_usuario']);
-        $pedido = new Pedidos($data['title'], $data['estado'],$data['total']);
+        $pedido = new Pedidos($data['estado'],$data['total']);
 
         $pedido->setCliente($usuario);
+        $entityManager->persist($pedido);
         $entityManager->flush();
         return $this->json(['message'=> 'pedido creado correctamente'], 200);
     }
@@ -65,9 +63,8 @@ class PedidoController extends AbstractController {
     {
         $pedido = $entityManager->getRepository(Pedidos::class)->find($id);
         $data = json_decode($request->getContent(),true);
-        if(isset($data['title'])){
-            $pedido->setNombre($data['title']);
-        }elseif(isset($data['estado'])){
+
+        if(isset($data['estado'])){
             $pedido->setEmail($data['estado']);
         }elseif(isset($data['total'])){
             $pedido->setPassword($data['total']);

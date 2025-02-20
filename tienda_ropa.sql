@@ -88,8 +88,8 @@ CREATE TABLE `usuarios` (
   `id_usuario` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `email` varchar(150) NOT NULL,
-  `contraseña` varchar(255) NOT NULL,
-  `fecha_registor` timestamp NOT NULL DEFAULT current_timestamp(),
+  `contrasena` varchar(255) NOT NULL,
+  `fecha_registro` timestamp NOT NULL DEFAULT current_timestamp(),
   `direccion` varchar(255) NOT NULL,
   `codigo_postal` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
