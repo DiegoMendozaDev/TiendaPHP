@@ -21,7 +21,6 @@ class PedidoController extends AbstractController {
         foreach ($pedidos as $pedido) {
             $data[] = [
                 'id' => $pedido->getId(),
-                'title' => $pedido->getTitle(),
                 'estado' => $pedido->getEstado(),
                 'total' => $pedido->getTotal(),
                 'cliente'=> $pedido->getCliente(),
@@ -65,9 +64,9 @@ class PedidoController extends AbstractController {
         $data = json_decode($request->getContent(),true);
 
         if(isset($data['estado'])){
-            $pedido->setEmail($data['estado']);
+            $pedido->setEstado($data['estado']);
         }elseif(isset($data['total'])){
-            $pedido->setPassword($data['total']);
+            $pedido->setTotal($data['total']);
         }elseif(isset($data['id_detalle'])){
             $detalle = $entityManager->getRepository(DetallePedido::class)->find($data['id_detalle']);
             $pedido->addDetalle($detalle);
