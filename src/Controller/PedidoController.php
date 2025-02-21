@@ -72,6 +72,6 @@ class PedidoController extends AbstractController {
             $pedido->addDetalle($detalle);
         }
         $entityManager->flush();
-        return $this->json(["message" => "Usuario actualizado correctamente"],200);
+        return $this->json(["message" => "pedido actualizado correctamente"],200);
     }
 }

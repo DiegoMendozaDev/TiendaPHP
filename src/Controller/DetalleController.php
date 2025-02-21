@@ -51,20 +51,17 @@ class DetalleController extends AbstractController {
         ];
         return $this->json($data, 201);
     }
-    #[Route('/update{id}', name:'_update', methods: ['put, patch'])]
+    #[Route('/update/{id}', name:'_update', methods: ['put'])]
     public function update(EntityManagerInterface $entityManager, Request $request, int $id): JsonResponse{
         $detalle = $entityManager->getRepository(DetallePedido::class)->find($id);
         if(!$detalle){
             return $this->json(["detalle" => "Error: "]);
         }
         $data = json_decode($request->getContent(), true);
-        if(!isset($data['id_pedido']) ||!isset($data['id_producto'])){
-            return $this->json(["detalle" => "Error: Invalid data"]);
-        }
-        $pedido = $entityManager->getRepository(Pedidos::class)->find($data['id_pedido']);
+        
+        
         $producto = $entityManager->getRepository(Producto::class)->find($data['id_producto']);
-        $detalle->setPedido($pedido);
-        $detalle->setId_producto($producto);
+        $detalle->setProducto($producto);
         $detalle->setCantidad($data['cantidad']);
         $detalle->getPrecio_Unitario($data['precio_unitario']);
         $entityManager->flush();
