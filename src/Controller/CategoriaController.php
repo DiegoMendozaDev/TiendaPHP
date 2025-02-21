@@ -24,7 +24,7 @@ class CategoriaController extends AbstractController{
         }
         return $this->json($data,200);
     }
-    #[Route('/create', name:"_create", methods:['POST'])]
+    #[Route('/create', name:"_create", methods: ['post'])]
     public function create(EntityManagerInterface $entityManager, Request $request) : JsonResponse{
         $data = json_decode($request->getContent(), true);
         if(!isset($data['nombre'])){
@@ -42,7 +42,7 @@ class CategoriaController extends AbstractController{
         ];
         return $this->json($data, 201);
     }
-    #[Route('/update/{id}', name: "_create", methods: ['put', 'patch'])]
+    #[Route('/update/{id}', name: "_update", methods: ['put', 'patch'])]
     public function update(EntityManagerInterface $entityManager, Request $request, int $id) : JsonResponse{
         $categoria = $entityManager->getRepository(Categoria::class)->find($id);
         if(!$categoria){
