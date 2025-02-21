@@ -47,6 +47,7 @@ class UsuarioController extends AbstractController{
         foreach ($usuarios as $usuario) {
             $data[] = [
                 'id'=> $usuario->getId(),
+                'nombre' => $usuario->getNombre(),
                 'email' => $usuario->getEmail(),
                 'roles' => $usuario->getRoles(),
                 'contrasena' => $usuario->getPassword(),

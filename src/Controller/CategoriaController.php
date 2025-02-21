@@ -66,6 +66,6 @@ class CategoriaController extends AbstractController{
         }
         $entityManager->remove($categoria);
         $entityManager->flush();
-        return $this->json(["message" => "Eliminada la categoria con id". $id]);
+        return $this->json(["message" => "Eliminada la categoria con id ". $id]);
     }   
 }

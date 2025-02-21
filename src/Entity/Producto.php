@@ -2,6 +2,8 @@
 namespace App\Entity;
 
 use App\Repository\ProductoRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
  
@@ -16,6 +18,9 @@ class Producto{
     #[ORM\ManyToOne(targetEntity: Categoria::class)]
     #[ORM\JoinColumn(name: 'id_categoria', referencedColumnName: "id_categoria")]
     private ?Categoria $categoria = null;
+
+    #[ORM\OneToMany(targetEntity:DetallePedido::class,mappedBy: 'producto')]
+    private ?Collection $detalles = null;
 
     #[ORM\Column(type: "string", length: 150)]
     private ?string $nombre = null;
@@ -35,6 +40,10 @@ class Producto{
     #[ORM\Column(type: "integer")]
     private ?int $stock = null;
 
+    public function __construct()
+    {
+        $this->detalles = new ArrayCollection();
+    }
 
     public function getId(): int
     {
@@ -103,5 +112,26 @@ class Producto{
         $this->stock = $stock;
         return $this;
     }
-
+    public function getDetalle():Collection
+    {
+        return $this->detalles;
+    }
+    public function addDetalle(DetallePedido $detalle):static
+    {
+        if(!$this->detalles->contains($detalle)){
+            $this->detalles->add($detalle);
+            $detalle->setProducto($this);
+        }
+        return $this;
+    }
+    public function removeDetalle(DetallePedido $detalle):static
+    {
+        if($this->detalles->remove($detalle))
+        {
+            if($detalle->getPedido() === $this){
+                $detalle->setProducto(null);
+            }
+        }
+        return $this;
+    }
 }
