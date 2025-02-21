@@ -42,7 +42,7 @@ class CategoriaController extends AbstractController{
         ];
         return $this->json($data, 201);
     }
-    #[Route('/update/{id}', name: "_create", methods: ['put', 'patch'])]
+    #[Route('/update/{id}', name: "_update", methods: ['put', 'patch'])]
     public function update(EntityManagerInterface $entityManager, Request $request, int $id) : JsonResponse{
         $categoria = $entityManager->getRepository(Categoria::class)->find($id);
         if(!$categoria){
@@ -66,6 +66,6 @@ class CategoriaController extends AbstractController{
         }
         $entityManager->remove($categoria);
         $entityManager->flush();
-        return $this->json(["message" => "Eliminada la categoria con id". $id]);
+        return $this->json(["message" => "Eliminada la categoria con id ". $id]);
     }   
 }

@@ -24,7 +24,7 @@ class ProductoController extends AbstractController{
                         'descripcion' => $producto->getDescripcion(),
                         'precio' => $producto->getPrecio(),
                         'marca' => $producto->getMarca(),
-                        'id_categoria' => $producto->getCategoria(),
+                        'id_categoria' => $producto->getCategoria()->getId(),
                         'foto' => $producto->getFoto(),
                         'stock' => $producto->getStock()
         ];
@@ -53,14 +53,14 @@ class ProductoController extends AbstractController{
             'nombre' => $producto->getNombre(),
             'descripcion' => $producto->getDescripcion(),
             'precio' => $producto->getPrecio(),
-            'id_categoria' => $producto->getCategoria(),
+            'id_categoria' => $producto->getCategoria()->getId(),
             'marca' => $producto->getMarca(),
             'foto' => $producto->getFoto(),
             'stock' => $producto->getStock(),
         ];
         return $this->json($data, 201);
     }
-    #[Route('/update/{id}', name:'_update', methods: ['put', 'patch'])]
+    #[Route('/update/{id}', name:'_update', methods: ['PUT'])]
     public function update(EntityManagerInterface $entityManager, Request $request, int $id) : JsonResponse{
         $producto = $entityManager->getRepository(Producto::class)->find($id);
         if(!$producto){
@@ -89,6 +89,6 @@ class ProductoController extends AbstractController{
         }
         $entityManager->remove($producto);
         $entityManager->flush();
-        return $this->json(["message" => 'Eliminado con exito el id'. $id, 200]);
+        return $this->json(["message" => 'Eliminado con exito el id '. $id],200);
     }
 }
