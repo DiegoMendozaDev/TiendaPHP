@@ -1,0 +1,11 @@
+RewriteEngine On
+
+# Eliminar index.php de la URL
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?url=$1 [L,QSA]
+
+
+
+
+
