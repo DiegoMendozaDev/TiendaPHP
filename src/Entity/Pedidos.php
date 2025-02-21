@@ -16,7 +16,7 @@ class Pedidos
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type: 'integer')]
     private ?int $id_pedido = null;
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?DateTimeInterface $fecha_pedido = null;

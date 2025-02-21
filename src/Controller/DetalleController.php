@@ -6,7 +6,6 @@ use App\Entity\DetallePedido;
 use App\Entity\Pedidos;
 use App\Entity\Producto;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Mapping\Entity;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -46,7 +45,7 @@ class DetalleController extends AbstractController {
         $data = [
             'id' => $detalle->getId_Detalle(),
             'id_pedido' => $detalle->getPedido(),
-            'id_producto' => $detalle->getId_producto(),
+            'id_producto' => $detalle->getProducto(),
             'cantidad' => $detalle->getCantidad(),
             'precio_unitario' => $detalle->getPrecio_Unitario()
         ];

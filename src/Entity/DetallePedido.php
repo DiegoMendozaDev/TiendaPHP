@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\DetallePedidoRepository;
+
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\DBAL\Types\Types;
+use App\Repository\DetallePedidoRepository;
 
 
 #[ORM\Entity(repositoryClass: DetallePedidoRepository::class)]
@@ -12,7 +13,7 @@ class DetallePedido
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column]
+    #[ORM\Column(type : 'integer')]
     private ?int $id_detalle = null;
     #[ORM\Column(length: 255)]
     private ?int $cantidad = null;
@@ -21,7 +22,7 @@ class DetallePedido
     #[ORM\ManyToOne(targetEntity: Pedidos::class, inversedBy:"pedido")]
     #[ORM\JoinColumn(name: "id_pedido", referencedColumnName: "id_pedido")]
     private ?Pedidos $pedido = null;
-    #[ORM\OneToOne(targetEntity: Producto::class)]
+    #[ORM\ManyToOne(targetEntity: Producto::class, inversedBy:"producto")]
     #[ORM\JoinColumn(name: "id_producto", referencedColumnName: "id_producto")]
     private ?Producto $producto = null;
 
@@ -38,7 +39,7 @@ class DetallePedido
     {
         return $this->precio_unitario;
     }
-    public function getId_producto(): ?int
+    public function getProducto(): ?Producto
     {
         return $this->producto;
     }

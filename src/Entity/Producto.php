@@ -12,7 +12,7 @@ class Producto{
     #[ORM\GeneratedValue()]
     #[ORM\Column(type: 'integer')]
     private ?int $id_producto = null;
-
+    
     #[ORM\ManyToOne(targetEntity: Categoria::class)]
     #[ORM\JoinColumn(name: 'id_categoria', referencedColumnName: "id_categoria")]
     private ?Categoria $categoria = null;
