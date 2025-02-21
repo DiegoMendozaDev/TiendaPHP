@@ -32,7 +32,7 @@ class CategoriaController extends AbstractController{
         }
         $categoria = new Categoria();
         $categoria->setNombre($data['nombre']);
-        $categoria->setDescripcion($data['descripcion']);
+        $categoria->setDescripcion($data['descripcion'] ?? '');
         $entityManager->persist($categoria);
         $entityManager->flush();
         $data = [

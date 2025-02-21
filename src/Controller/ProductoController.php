@@ -89,6 +89,6 @@ class ProductoController extends AbstractController{
         }
         $entityManager->remove($producto);
         $entityManager->flush();
-        return $this->json(["message" => 'Eliminado con exito el id '. $id],200);
+        return $this->json(["message" => 'Eliminado con exito el id p'. $id],200);
     }
 }
