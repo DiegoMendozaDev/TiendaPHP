@@ -6,7 +6,7 @@ class Productos_model{
         
     }
     public function todosProductos(){
-        $url = "https://127.0.0.1:8000/api/productos/ver";
+        $url = "http://127.0.0.1:8000/api/productos/ver";
         // $data = json_encode([
         //     "firstname" => "Ana",
         //     "lastname" => "García",
@@ -28,6 +28,8 @@ class Productos_model{
         // Verifica errores
         if (curl_errno($ch)) {
             echo 'Error en cURL: ' . curl_error($ch);
+            $error = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            echo $error;
             exit;
         } else {
             // $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
