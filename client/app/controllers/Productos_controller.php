@@ -1,7 +1,5 @@
 <?php
 
-use App\Entity\Producto;
-
 class Productos_controller
 {
     private $view;

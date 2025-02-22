@@ -209,7 +209,8 @@
                 <svg class="bi" width="24" height="24">
                   <use xlink:href="#cart" />
                 </svg>
-              </a></li>
+              </a>
+            </li>
           </ul>
         </div>
       </div>

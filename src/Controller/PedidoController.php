@@ -35,18 +35,21 @@ class PedidoController extends AbstractController {
         $data = json_decode($request->getContent(),true);
         if(!isset($data['estado'])){
             return $this->json(['Error'=>'Fatal Error'],400);
-        }elseif(!isset($data['total'])){
-            return $this->json(['Error'=>'Fatal Error'],400);
         }elseif(!isset($data['id_usuario'])){
             return $this->json(['Error'=>'Fatal Error'],400);
         }
         $usuario = $entityManager->getRepository(Usuario::class)->find($data['id_usuario']);
-        $pedido = new Pedidos($data['estado'],$data['total']);
+        $pedido = $entityManager->getRepository(Pedidos::class)->comprobarPedido($usuario, $data['estado']);
+        if($pedido){;
+            return $this->json($pedido, 200);
+        }else{
+            $pedido = new Pedidos($data['estado'],0);
+            $pedido->setCliente($usuario);
+            $entityManager->persist($pedido);
+            $entityManager->flush();
+            return $this->json(['idPedido'=>$pedido->getId()], 200);
+        }
 
-        $pedido->setCliente($usuario);
-        $entityManager->persist($pedido);
-        $entityManager->flush();
-        return $this->json(['message'=> 'pedido creado correctamente'], 200);
     }
     #[Route('/eliminar/{id}',name: 'eliminar', methods:['DELETE'])]
     public function eliminar(EntityManagerInterface $entityManager,Request $request, int $id):JsonResponse
