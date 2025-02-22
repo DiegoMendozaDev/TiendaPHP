@@ -227,7 +227,7 @@
       <h2 class="pb-2 border-bottom">Productos</h2>
       <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
         <?php foreach ($productos as $producto):?>
-          <form action="" method="post">
+          <form action="<?php url('Libros_controller','editarLibro')?>" method="post">
             <div class="col">
               <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('<?=$producto->foto?>');">
                 <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
