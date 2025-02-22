@@ -38,7 +38,6 @@ class Libros_controller
         if ($libro === null) {
             die("Identificador de libro incorrecto");
         }
-
         //Pasamos a la vista toda la información que se desea representar
         $variables = array();
         $variables['libro'] = $libro;

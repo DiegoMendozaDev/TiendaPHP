@@ -44,6 +44,6 @@ class Usuarios_controller
     }
     public function confirmarRegistro($params){
         print_r($params);
-        $this->view->mostrar('usuarios/register.php', []);
+        // $this->view->mostrar('usuarios/register.php', $params);
     }
 }
