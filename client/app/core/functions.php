@@ -11,7 +11,6 @@ function dataSanitize($data)
     return htmlspecialchars(stripslashes(trim($data)));
 }
 function api($url,$data = [], $method = 'GET'){
-    $url = "https://127.0.0.1:8000/api/productos/ver";
     $ch = curl_init($url);
     if(!empty($data)){
         $data = json_encode($data);
