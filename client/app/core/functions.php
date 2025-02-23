@@ -12,7 +12,7 @@ function dataSanitize($data)
 }
 function api($url,$data = [], $method = 'GET'){
     $ch = curl_init($url);
-    if(!empty($data)){
+    if(!empty($data) || $method == 'DELETE'){
         $data = json_encode($data);
         // Ejemplo
         // $data = json_encode([

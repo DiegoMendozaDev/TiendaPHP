@@ -123,7 +123,7 @@
                     <span>Total (EUR)</span>
                     <strong><?=$precio_total?>€</strong>
                   </li>
-                  <?php endif;?>
+
                 </ul>
               </div>
               <hr class="my-4">
@@ -131,10 +131,11 @@
             </form>
 
             <div class="mt-3 d-flex gap-2">
-              <form action="" method="post" class="flex-grow-1">
-                <input type="hidden" name="id_pedido">
+              <form action="http://localhost/Proyecto_tienda_PHP/client/public/pedidos/vaciarCarrito" method="post" class="flex-grow-1">
+                <input type="hidden" name="id_pedido" value="<?=$productos->id_pedido?>">
                 <button class="w-100 btn btn-outline-secondary btn-lg" type="submit">Vaciar carrito</button>
               </form>
+              <?php endif;?>
               <a href="http://localhost/Proyecto_tienda_PHP/client/public/productos/comprar" class="w-100 btn btn-secondary btn-lg">Seguir comprando</a>
             </div>
           </div>

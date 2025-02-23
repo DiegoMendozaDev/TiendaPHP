@@ -85,6 +85,13 @@ class PedidoController extends AbstractController {
     public function eliminar(EntityManagerInterface $entityManager,Request $request, int $id):JsonResponse
     {
         $pedido = $entityManager->getRepository(Pedidos::class)->find($id);
+        $detalles = $pedido->getDetalles()->getValues();
+        foreach ($detalles as $detalle) {
+            $producto = $detalle->getProducto();
+            $cantidad = $detalle->getCantidad();
+            $producto->setStock($producto->getStock()+ $cantidad);
+            $entityManager->flush();
+        }
         $entityManager->remove($pedido);
         $entityManager->flush();
         return $this->json(['message'=>'Pedido eliminado correctamente'],200);
