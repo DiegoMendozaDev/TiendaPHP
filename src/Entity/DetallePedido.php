@@ -15,14 +15,14 @@ class DetallePedido
     #[ORM\GeneratedValue]
     #[ORM\Column(type : 'integer')]
     private ?int $id_detalle = null;
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: 'integer')]
     private ?int $cantidad = null;
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?string $precio_unitario = null;
-    #[ORM\ManyToOne(targetEntity: Pedidos::class, inversedBy:"pedido")]
+    #[ORM\ManyToOne(targetEntity: Pedidos::class, inversedBy:"detalles")]
     #[ORM\JoinColumn(name: "id_pedido", referencedColumnName: "id_pedido")]
     private ?Pedidos $pedido = null;
-    #[ORM\ManyToOne(targetEntity: Producto::class, inversedBy:"producto")]
+    #[ORM\ManyToOne(targetEntity: Producto::class, inversedBy:"detalles")]
     #[ORM\JoinColumn(name: "id_producto", referencedColumnName: "id_producto")]
     private ?Producto $producto = null;
 

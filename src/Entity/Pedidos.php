@@ -24,7 +24,7 @@ class Pedidos
     private ?string $estado = null;
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
     private ?string $total = null;
-    #[ORM\OneToMany(targetEntity: DetallePedido::class, mappedBy: 'pedido')]
+    #[ORM\OneToMany(targetEntity: DetallePedido::class, mappedBy: 'pedido', cascade: ['remove'])]
     private ?Collection $detalles = null;
     #[ORM\ManyToOne(targetEntity:Usuario::class ,inversedBy: 'pedidos')]
     #[ORM\JoinColumn(name:'id_usuario',referencedColumnName:'id_usuario',nullable: false)]
@@ -58,7 +58,7 @@ class Pedidos
     {
         return $this->usuario;
     }
-    public function getDetalle(): ?Collection
+    public function getDetalles(): ?Collection
     {
         return $this->detalles;
     }

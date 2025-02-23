@@ -233,7 +233,7 @@
           <ul class="navbar-nav flex-grow-1 justify-content-between">
             <li class="nav-item"><h2 class="pb-2">Productos</h2></li>
             <li class="nav-item"><a class="nav-link" href="http://localhost/Proyecto_tienda_PHP/client/public/">Volver</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">
+            <li class="nav-item"><a class="nav-link" href="http://localhost/Proyecto_tienda_PHP/client/public/pedidos/verCarrito/7">
                 <svg class="bi" width="24" height="24">
                   <use xlink:href="#cart" />
                 </svg>
@@ -246,6 +246,7 @@
       </nav>
       <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
         <?php foreach ($productos as $producto):?>
+          <?php if(!$producto->stock == 0):?>
           <form action="<?= url('pedidos', 'anadirCarrito')?>" method="post">
             <input type="hidden" name="idProducto" value="<?= $producto->id?>">
             <input type="hidden" name="idUsuario" value="7">
@@ -271,6 +272,7 @@
               </div>
             </div>
           </form>
+          <?php endif;?>
         <?php endforeach?>
       </div>
     </div>
