@@ -6,7 +6,7 @@ class Productos_model{
         
     }
     public function todosProductos(){
-        $productos= api("https://127.0.0.1:8000/api/productos/ver");
+        $productos= api("http://127.0.0.1:8000/api/productos/ver");
         return $productos;
     }
 }
