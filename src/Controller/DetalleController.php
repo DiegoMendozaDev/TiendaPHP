@@ -33,15 +33,25 @@ class DetalleController extends AbstractController {
         if(!isset($data['id_producto']) || !isset($data['id_pedido'])){
             return $this->json(["message" => "Error: Invalid data"]);
         }
-        $detalle = new DetallePedido();
+
         $pedido = $entityManager->getRepository(Pedidos::class)->find($data['id_pedido']);
         $producto = $entityManager->getRepository(Producto::class)->find($data['id_producto']);
-        $detalle->setPedido($pedido);
-        $detalle->setProducto($producto);
-        $detalle->setCantidad($data['cantidad']);
-        $detalle->setPrecio_Unitario($data['precio_unitario']);
-        $entityManager->persist($detalle);
-        $entityManager->flush();
+        $detalle = $entityManager->getRepository(DetallePedido::class)->comprobarDetalle($pedido,$producto);
+        if($detalle){
+            $detalle = $entityManager->getRepository(DetallePedido::class)->find($detalle[0]['id_detalle']);
+            $detalle->setCantidad($detalle->getCantidad() + 1);
+            $producto->setStock($producto->getStock()-1);
+            $entityManager->flush();
+        }else{
+            $detalle = new DetallePedido();
+            $detalle->setPedido($pedido);
+            $detalle->setProducto($producto);
+            $detalle->setCantidad($data['cantidad']);
+            $detalle->setPrecio_Unitario($producto->getPrecio());
+            $producto->setStock($producto->getStock()-1);
+            $entityManager->persist($detalle);
+            $entityManager->flush();
+        }
         $data = [
             'id' => $detalle->getId_Detalle(),
             'id_pedido' => $detalle->getPedido(),

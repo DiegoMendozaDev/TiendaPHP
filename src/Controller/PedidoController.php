@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\DetallePedido;
 use App\Entity\Pedidos;
+use App\Entity\Producto;
 use App\Entity\Usuario;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Attribute\Route;
@@ -24,10 +25,39 @@ class PedidoController extends AbstractController {
                 'estado' => $pedido->getEstado(),
                 'total' => $pedido->getTotal(),
                 'cliente'=> $pedido->getCliente(),
-                'detalle' => $pedido->getDetalle(),
+                'detalle' => $pedido->getDetalles(),
             ];
         }
         return $this->json(['pedidos'=> $data], 200);
+    }
+    #[Route('/verCarrito', name: 'verCarrito', methods:['GET'])]
+    public function verUno(EntityManagerInterface $entityManager, Request $request): JsonResponse
+    {
+        $data = json_decode($request->getContent(),true);
+        if(!isset($data['estado'])){
+            return $this->json(['Error'=>'Fatal Error'],400);
+        }elseif(!isset($data['id_usuario'])){
+            return $this->json(['Error'=>'Fatal Error'],400);
+        }
+        $usuario = $entityManager->getRepository(Usuario::class)->find($data['id_usuario']);
+        $pedido = $entityManager->getRepository(Pedidos::class)->comprobarPedido($usuario, $data['estado']);
+        $pedido = $entityManager->getRepository(Pedidos::class)->find($pedido[0]['id_pedido']);
+        if(!$pedido){
+            return $this->json(['message'=> "Pedido no encontrado"], 400);
+        }
+
+        $data = [];
+        $detalles = $pedido->getDetalles()->getValues();
+        foreach ($detalles as $detalle) {
+            $data[]=[
+                'id_detalle' => $detalle->getId_Detalle(),
+                'nombre' => $detalle->getProducto()->getNombre(),
+                'precio' => $detalle->getProducto()->getPrecio(),
+                'cantidad' => $detalle->getCantidad()
+            ];
+        }
+
+        return $this->json(['detalles'=> $data,'id_pedido'=>$pedido->getId()], 200);
     }
     #[Route('/create', name: 'crear', methods:['POST'])]
     public function crear(EntityManagerInterface $entityManager, Request $request): JsonResponse
@@ -35,18 +65,21 @@ class PedidoController extends AbstractController {
         $data = json_decode($request->getContent(),true);
         if(!isset($data['estado'])){
             return $this->json(['Error'=>'Fatal Error'],400);
-        }elseif(!isset($data['total'])){
-            return $this->json(['Error'=>'Fatal Error'],400);
         }elseif(!isset($data['id_usuario'])){
             return $this->json(['Error'=>'Fatal Error'],400);
         }
         $usuario = $entityManager->getRepository(Usuario::class)->find($data['id_usuario']);
-        $pedido = new Pedidos($data['estado'],$data['total']);
+        $pedido = $entityManager->getRepository(Pedidos::class)->comprobarPedido($usuario, $data['estado']);
+        if($pedido){;
+            return $this->json(["id_pedido"=>$pedido[0]["id_pedido"]], 200);
+        }else{
+            $pedido = new Pedidos($data['estado'],0);
+            $pedido->setCliente($usuario);
+            $entityManager->persist($pedido);
+            $entityManager->flush();
+            return $this->json(["id_pedido"=>$pedido->getId()], 200);
+        }
 
-        $pedido->setCliente($usuario);
-        $entityManager->persist($pedido);
-        $entityManager->flush();
-        return $this->json(['message'=> 'pedido creado correctamente'], 200);
     }
     #[Route('/eliminar/{id}',name: 'eliminar', methods:['DELETE'])]
     public function eliminar(EntityManagerInterface $entityManager,Request $request, int $id):JsonResponse

@@ -126,7 +126,7 @@ class Producto{
     }
     public function removeDetalle(DetallePedido $detalle):static
     {
-        if($this->detalles->remove($detalle))
+        if($this->detalles->removeElement($detalle))
         {
             if($detalle->getPedido() === $this){
                 $detalle->setProducto(null);
