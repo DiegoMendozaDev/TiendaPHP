@@ -45,3 +45,11 @@ function api($url,$data = [], $method = 'GET'){
     }
     curl_close($ch);
 }
+function logout(){
+    session_start();
+    session_destroy();
+    session_unset();
+    unset($_SESSION["email"]);
+    unset($_SESSION["id"]);
+    header("Location: http://localhost/Proyecto_tienda_PHP/client/app/views/usuarios/login.php");
+}
