@@ -115,8 +115,10 @@ class UsuarioController extends AbstractController
     public function ver_usuario(EntityManagerInterface $entityManager, Request $request): JsonResponse{
         $data = json_decode($request->getContent(), true);
         $usuario = $entityManager->getRepository(Usuario::class)->findOneBy(['email' => $data["email"]]);
+       return $this->json([
+        "id" => $usuario->getId()
+       ]);
         
-        return $this->json($usuario);
     }
 
     

@@ -49,6 +49,7 @@ class Usuarios_controller
                 $_SESSION["email"] = $email;
                 $_SESSION["id"] = $id;
                 var_dump($_SESSION["email"]);
+                var_dump($_SESSION["id"]);
             }else{
                 echo "Error al iniciar sesion";
             }
