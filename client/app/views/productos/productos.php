@@ -233,7 +233,7 @@
           <ul class="navbar-nav flex-grow-1 justify-content-between">
             <li class="nav-item"><h2 class="pb-2">Productos</h2></li>
             <li class="nav-item"><a class="nav-link" href="http://localhost/Proyecto_tienda_PHP/client/public/">Volver</a></li>
-            <li class="nav-item"><a class="nav-link" href="http://localhost/Proyecto_tienda_PHP/client/public/pedidos/verCarrito/7">
+            <li class="nav-item"><a class="nav-link" href="http://localhost/Proyecto_tienda_PHP/client/public/pedidos/verCarrito/"<?=$_SESSION['id']?>>
                 <svg class="bi" width="24" height="24">
                   <use xlink:href="#cart" />
                 </svg>
@@ -249,7 +249,7 @@
           <?php if(!$producto->stock == 0):?>
           <form action="<?= url('pedidos', 'anadirCarrito')?>" method="post">
             <input type="hidden" name="idProducto" value="<?= $producto->id?>">
-            <input type="hidden" name="idUsuario" value="7">
+            <input type="hidden" name="idUsuario" value="<?=$_SESSION['id']?>">
             <div class="col">
               <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg" style="background-image: url('<?=$producto->foto?>');">
                 <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
