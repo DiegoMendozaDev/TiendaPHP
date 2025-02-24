@@ -28,8 +28,9 @@ class Pedidos_controller
     }
     public function verCarrito($params)
     {
-        if(!$_SESSION["email"] && !$_SESSION["id"]){
-            header("Location: http://localhost/Proyecto_tienda_PHP/client/app/views/usuarios/login.php");
+        session_start();
+        if(!isset($_SESSION["email"]) && !isset($_SESSION["id"])){
+        header("Location: http://localhost/Proyecto_tienda_PHP/client/app/views/usuarios/login.php");
         }else{
             require "../app/models/Pedidos_model.php";
             $pedidos_model = new Pedidos_model;
@@ -43,8 +44,9 @@ class Pedidos_controller
     }
     public function vaciarCarrito($params)
     {
-        if(!$_SESSION["email"] && !$_SESSION["id"]){
-            header("Location: http://localhost/Proyecto_tienda_PHP/client/app/views/usuarios/login.php");
+        session_start();
+        if(!isset($_SESSION["email"]) && !isset($_SESSION["id"])){
+            header("Location: http://localhost/Proyecto_tienda_PHP/client/public/usuarios/login");
         }else{
             require "../app/models/Pedidos_model.php";
             $pedidos_model = new Pedidos_model;
@@ -55,7 +57,8 @@ class Pedidos_controller
     }
     public function confirmarPedido($params)
     {
-        if(!$_SESSION["email"] && !$_SESSION["id"]){
+        session_start();
+        if(!isset($_SESSION["email"]) && !isset($_SESSION["id"])){
             header("Location: http://localhost/Proyecto_tienda_PHP/client/app/views/usuarios/login.php");
         }else{
             require "../app/models/Pedidos_model.php";

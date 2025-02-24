@@ -11,6 +11,9 @@ class Usuarios_controller
     {
         $this->view->mostrar('usuarios/login.php', []);
     }
+    public function registrar(){
+        $this->view->mostrar('usuarios/register.php', []);
+    }
     public function register()
     {
         if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -25,7 +28,7 @@ class Usuarios_controller
                 require "../app/models/Usuarios_model.php";
                 $usuario_model = new Usuarios_model;
                 $mensaje = $usuario_model->register($nombre, $email, $contraseña, $direccion, $cp);
-               header('Location: http://localhost/Proyecto_tienda_PHP/client/app/views/usuarios/login.php');
+               header('Location: http://localhost/Proyecto_tienda_PHP/client/public/usuarios/login');
                 exit;
             }else{
                 echo "Error al registrarse";
@@ -50,8 +53,10 @@ class Usuarios_controller
                     $_SESSION["email"] = $email;
                     $_SESSION["id"] = $id;
                     header("Location: http://localhost/Proyecto_tienda_PHP/client/public/productos/index");
+                    
                 }else{
                     echo "Error al iniciar sesion";
+                    header("Location: http://localhost/Proyecto_tienda_PHP/client/public/usuarios/login");
                 }
             }
         

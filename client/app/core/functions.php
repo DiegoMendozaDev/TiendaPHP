@@ -51,5 +51,5 @@ function logout(){
     session_unset();
     unset($_SESSION["email"]);
     unset($_SESSION["id"]);
-    header("Location: http://localhost/Proyecto_tienda_PHP/client/app/views/usuarios/login.php");
+    header("Location: http://localhost/Proyecto_tienda_PHP/client/public/usuarios/login");
 }

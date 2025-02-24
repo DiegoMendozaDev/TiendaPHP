@@ -10,22 +10,21 @@ class Productos_controller
     }
     public function index(){
         session_start();
-        if(!$_SESSION["email"] && !$_SESSION["id"]){
-            header("Location: http://localhost/Proyecto_tienda_PHP/client/app/views/usuarios/login.php");
-        }else{
-            require "../app/models/Productos_model.php";
-            $producto_model = new Productos_model;
-            $productos = $producto_model->todosProductos();
-            $variables = [];
-            $variables['productos'] = $productos;
-            $this->view->mostrar('productos/index.php',$variables);
-        }
+    
+        require "../app/models/Productos_model.php";
+        $producto_model = new Productos_model;
+        $productos = $producto_model->todosProductos();
+        $variables = [];
+        $variables['productos'] = $productos;
+        $this->view->mostrar('productos/index.php',$variables);
+        
       
     }
     public function comprar(){
         session_start();
-        if(!$_SESSION["email"] && !$_SESSION["id"]){
-            header("Location: http://localhost/Proyecto_tienda_PHP/client/app/views/usuarios/login.php");
+        if(!isset($_SESSION["email"]) && !isset($_SESSION["id"])){
+            header("Location: http://localhost/Proyecto_tienda_PHP/client/public/usuarios/login");
+            exit();
         }else{
             require "../app/models/Productos_model.php";
             $producto_model = new Productos_model;

@@ -14,7 +14,7 @@ class Usuarios_model
             "direccion" => $direccion,
             "codigo_postal" => $cp
         ];
-        $registrar = api("https://127.0.0.1:8000/api/usuario/crear", $data, 'POST');
+        $registrar = api("http://127.0.0.1:8000/api/usuario/crear", $data, 'POST');
         return $registrar;
         // $url = "localhost/servicios/rest/public/person/11";
         // $data = json_encode([
@@ -49,14 +49,14 @@ class Usuarios_model
             "email" => $email,
             "contrasena" => $contraseña
         ];
-        $comprobar = api("https://127.0.0.1:8000/api/usuario/comprobar_usuario", $data, 'POST');
+        $comprobar = api("http://127.0.0.1:8000/api/usuario/comprobar_usuario", $data, 'POST');
         return $comprobar;
     }
     public function idporemail($email){
         $data = [
             "email" => $email
         ];
-        $id = api("https://127.0.0.1:8000/api/usuario/ver_usuario", $data, 'POST');
+        $id = api("http://127.0.0.1:8000/api/usuario/ver_usuario", $data, 'POST');
         return $id;
     }
     

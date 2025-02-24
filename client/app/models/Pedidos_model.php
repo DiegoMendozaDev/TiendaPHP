@@ -10,7 +10,7 @@ class Pedidos_model{
             "id_usuario" => $idUsuario, 
             "estado"=>$estado
         ];
-        $mensaje = api("https://127.0.0.1:8000/api/pedido/create", $datos, 'POST');
+        $mensaje = api("http://127.0.0.1:8000/api/pedido/create", $datos, 'POST');
         return $mensaje;
     }
     public function verPedido($idUsuario,$estado){
@@ -18,18 +18,18 @@ class Pedidos_model{
             "id_usuario" => $idUsuario, 
             "estado"=>$estado
         ];
-        $mensaje = api("https://127.0.0.1:8000/api/pedido/verCarrito", $datos);
+        $mensaje = api("http://127.0.0.1:8000/api/pedido/verCarrito", $datos);
         return $mensaje;
     }
     public function eliminarPedido($idPedido){
-        $mensaje = api("https://127.0.0.1:8000/api/pedido/eliminar/".$idPedido, method:'DELETE');
+        $mensaje = api("http://127.0.0.1:8000/api/pedido/eliminar/".$idPedido, method:'DELETE');
         return $mensaje;
     }
     public function pedidoComprado($idPedido){
         $datos = [
             'estado'=> "comprado"
         ];
-        $mensaje = api("https://127.0.0.1:8000/api/pedido/editar/".$idPedido, $datos,'PUT');
+        $mensaje = api("http://127.0.0.1:8000/api/pedido/editar/".$idPedido, $datos,'PUT');
         return $mensaje;
     }
 }

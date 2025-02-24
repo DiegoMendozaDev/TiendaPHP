@@ -233,7 +233,7 @@
           <ul class="navbar-nav flex-grow-1 justify-content-between">
             <li class="nav-item"><h2 class="pb-2">Productos</h2></li>
             <li class="nav-item"><a class="nav-link" href="http://localhost/Proyecto_tienda_PHP/client/public/">Volver</a></li>
-            <li class="nav-item"><a class="nav-link" href="http://localhost/Proyecto_tienda_PHP/client/public/pedidos/verCarrito/"<?=$_SESSION['id']?>>
+            <li class="nav-item"><a class="nav-link" href="http://localhost/Proyecto_tienda_PHP/client/public/pedidos/verCarrito/"<?=$_SESSION['id']->id ?? ''?>>
                 <svg class="bi" width="24" height="24">
                   <use xlink:href="#cart" />
                 </svg>

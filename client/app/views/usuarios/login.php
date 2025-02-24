@@ -175,7 +175,7 @@
     </div>
     <div class="d-flex align-items-center">
         <button class="btn btn-primary w-100 py-2" type="submit">Iniciar</button>
-        <a href="http://localhost/Proyecto_tienda_PHP/client/app/views/usuarios/register.php">Registrarse</a>
+        <a href="http://localhost/Proyecto_tienda_PHP/client/public/usuarios/registrar">Registrarse</a>
     </div>
     <p class="mt-5 mb-3 text-body-secondary">&copy; Diego y Carlos</p>
   </form>
