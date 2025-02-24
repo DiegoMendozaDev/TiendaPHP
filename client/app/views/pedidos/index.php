@@ -100,7 +100,7 @@
 
         <div class="row g-5 justify-content-center">
           <div class="col-md-7 col-lg-8">
-            <form class="needs-validation" novalidate>
+            <form action="http://localhost/Proyecto_tienda_PHP/client/public/pedidos/confirmarPedido" method="post" class="needs-validation" novalidate>
               <div class="col-md-5 col-lg-4 order-md-last">
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
                   <span class="text-primary">Tu carrito</span>
@@ -127,6 +127,7 @@
                 </ul>
               </div>
               <hr class="my-4">
+              <input type="hidden" name="id_pedido" value="<?=$productos->id_pedido?>">
               <button class="w-100 btn btn-primary btn-lg" type="submit">Comprar</button>
             </form>
 

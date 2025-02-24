@@ -25,4 +25,11 @@ class Pedidos_model{
         $mensaje = api("http://127.0.0.1:8000/api/pedido/eliminar/".$idPedido, method:'DELETE');
         return $mensaje;
     }
+    public function pedidoComprado($idPedido){
+        $datos = [
+            'estado'=> "comprado"
+        ];
+        $mensaje = api("http://127.0.0.1:8000/api/pedido/editar/".$idPedido, $datos,'PUT');
+        return $mensaje;
+    }
 }

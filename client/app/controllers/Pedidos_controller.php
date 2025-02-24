@@ -33,9 +33,15 @@ class Pedidos_controller
     public function vaciarCarrito($params)
     {
         require "../app/models/Pedidos_model.php";
-        require "../app/models/Productos_model.php";
         $pedidos_model = new Pedidos_model;
         $mensaje = $pedidos_model->eliminarPedido($params['id_pedido']);
+        header('Location: http://localhost/Proyecto_tienda_PHP/client/public/productos/comprar');
+    }
+    public function confirmarPedido($params)
+    {
+        require "../app/models/Pedidos_model.php";
+        $pedidos_model = new Pedidos_model;
+        $mensaje = $pedidos_model->pedidoComprado($params['id_pedido']);
         header('Location: http://localhost/Proyecto_tienda_PHP/client/public/productos/comprar');
     }
 
