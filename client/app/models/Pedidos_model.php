@@ -21,4 +21,8 @@ class Pedidos_model{
         $mensaje = api("http://127.0.0.1:8000/api/pedido/verCarrito", $datos);
         return $mensaje;
     }
+    public function eliminarPedido($idPedido){
+        $mensaje = api("http://127.0.0.1:8000/api/pedido/eliminar/".$idPedido, method:'DELETE');
+        return $mensaje;
+    }
 }
