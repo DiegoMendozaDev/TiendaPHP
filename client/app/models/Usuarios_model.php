@@ -5,7 +5,17 @@ class Usuarios_model
     {
         
     }
-    public function register(){
+    
+    public function register($nombre, $email, $contraseña, $direccion, $cp){
+        $data = [
+            "nombre" =>  $nombre,
+            "email" => $email,
+            "contrasena" => $contraseña,
+            "direccion" => $direccion,
+            "codigo_postal" => $cp
+        ];
+        $registrar = api("http://127.0.0.1:8000/api/usuario/crear", $data, 'POST');
+        return $registrar;
         // $url = "localhost/servicios/rest/public/person/11";
         // $data = json_encode([
         //     "firstname" => "Ana",
@@ -34,4 +44,20 @@ class Usuarios_model
         // }
         // curl_close($ch);
     }
+    public function iniciar_sesion($email, $contraseña){
+        $data = [
+            "email" => $email,
+            "contrasena" => $contraseña
+        ];
+        $comprobar = api("http://127.0.0.1:8000/api/usuario/comprobar_usuario", $data, 'POST');
+        return $comprobar;
+    }
+    public function idporemail($email){
+        $data = [
+            "email" => $email
+        ];
+        $id = api("http://127.0.0.1:8000/api/usuario/ver_usuario", $data, 'POST');
+        return $id;
+    }
+    
 }

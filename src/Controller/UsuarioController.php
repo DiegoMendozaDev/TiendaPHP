@@ -4,6 +4,7 @@ namespace App\Controller;
 use App\Entity\Usuario;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Config\Definition\Builder\MergeBuilder;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -102,4 +103,21 @@ class UsuarioController extends AbstractController
         $entityManager->flush();
         return $this->json(["message" => "Usuario actualizado correctamente"], 200);
     }
+    #[Route('/comprobar_usuario', name : "_comprobar", methods:["POST"])]
+    public function comprobar(EntityManagerInterface $entityManager,UserPasswordHasherInterface $passwordHasher, Request $request): JsonResponse{
+        $data = json_decode($request->getContent(), true);
+        $usuario = $entityManager->getRepository(Usuario::class)->findOneBy(['email' => $data["email"]]);
+        $pass = $passwordHasher->isPasswordValid($usuario, $data["contrasena"]);
+        return $this->json($pass);
+        
+    }
+    #[Route('/ver_usuario', name : "ver_usuario", methods:["POST"])]
+    public function ver_usuario(EntityManagerInterface $entityManager, Request $request): JsonResponse{
+        $data = json_decode($request->getContent(), true);
+        $usuario = $entityManager->getRepository(Usuario::class)->findOneBy(['email' => $data["email"]]);
+        
+        return $this->json($usuario);
+    }
+
+    
 }

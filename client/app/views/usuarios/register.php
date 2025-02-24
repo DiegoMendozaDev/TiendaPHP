@@ -154,30 +154,30 @@
 
     
 <main class="form-signin w-100 m-auto">
-  <form action="http://localhost/Proyecto_tienda_PHP/client/public/usuarios/confirmarRegistro" method="POST">
+  <form action="http://localhost/Proyecto_tienda_PHP/client/public/usuarios/register" method="POST">
     <h1 class="h3 mb-3 fw-normal">Registrarse</h1>
     <div class="form-floating">
-      <input type="text" class="form-control" id="floatingInputNombre" placeholder="Diego Mendoza">
+      <input type="text" class="form-control" id="floatingInputNombre" name="nombre" placeholder="Diego Mendoza">
       <label for="floatingInput">Nombre</label>
     </div>
     <div class="form-floating">
-      <input type="email" class="form-control" id="floatingInputEmail" placeholder="name@example.com">
+      <input type="email" class="form-control" id="floatingInputEmail" name="email" placeholder="name@example.com">
       <label for="floatingInput">Email</label>
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+      <input type="password" class="form-control" id="floatingPassword" name="contrasena" placeholder="Password">
       <label for="floatingPassword">Contraseña</label>
     </div>
     <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPasswordRepeat" placeholder="Password">
+      <input type="password" class="form-control" id="floatingPasswordRepeat" name="contrasena2" placeholder="Password">
       <label for="floatingPassword">Repetir contraseña</label>
     </div>
     <div class="form-floating">
-      <input type="text" class="form-control" id="floatingInputDireccion" placeholder="c/Laguna">
+      <input type="text" class="form-control" id="floatingInputDireccion" name="direccion" placeholder="c/Laguna">
       <label for="floatingInput">Dirección</label>
     </div>
     <div class="form-floating">
-      <input type="number" class="form-control" id="floatingInputPostal" placeholder="28025">
+      <input type="number" class="form-control" id="floatingInputPostal" name="codigo_postal" placeholder="28025">
       <label for="floatingInput">Codigo Postal</label>
     </div>
     <br>

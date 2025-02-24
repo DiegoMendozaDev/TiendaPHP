@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-<?php
-namespace App\Repository;
-use App\Entity\Pedidos;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
-
-class PedidosRepository extends ServiceEntityRepository{
-    public function __construct(ManagerRegistry $registry){
-        parent::__construct($registry, Pedidos::class);
-    }
-    
-}
-=======
 <?php
 namespace App\Repository;
 use App\Entity\Pedidos;
@@ -32,5 +18,5 @@ class PedidosRepository extends ServiceEntityRepository{
         ')->setParameter(':usuario', $usuario)->setParameter(':estado', $estado)->getResult();
     }
 }
->>>>>>> f90171dfe408513a4ce169212379f1ca3eedcac0
+
 ?>
