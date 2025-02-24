@@ -11,7 +11,7 @@ class Detalles_model{
             "id_producto"=>$idProducto,
             "cantidad" => 1
         ];
-        $mensaje = api("http://127.0.0.1:8000/api/detalle/create", $datos, 'POST');
+        $mensaje = api("https://127.0.0.1:8000/api/detalle/create", $datos, 'POST');
         return $mensaje;
     }
 }

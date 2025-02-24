@@ -205,7 +205,7 @@
             <li class="nav-item"><a class="nav-link" href="#">Enterprise</a></li>
             <li class="nav-item"><a class="nav-link" href="#">Support</a></li>
             <li class="nav-item"><a class="nav-link" href="http://localhost/Proyecto_tienda_PHP/client/public/Usuarios/login">Login</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">
+            <li class="nav-item"><a class="nav-link" href="http://localhost/Proyecto_tienda_PHP/client/public/pedidos/verCarrito/7">
                 <svg class="bi" width="24" height="24">
                   <use xlink:href="#cart" />
                 </svg>
