@@ -204,7 +204,12 @@
             <li class="nav-item"><a class="nav-link" href="http://localhost/Proyecto_tienda_PHP/client/public/productos/comprar">Product</a></li>
             <li class="nav-item"><a class="nav-link" href="#">Enterprise</a></li>
             <li class="nav-item"><a class="nav-link" href="#">Support</a></li>
-            <li class="nav-item"><a class="nav-link" href="http://localhost/Proyecto_tienda_PHP/client/public/Usuarios/login">Login</a></li>
+            <?php if($_SESSION["email"] && $_SESSION["id"]): ?>
+              <li class="nav-item"><a class="nav-link" href="http://localhost/Proyecto_tienda_PHP/client/public/Usuarios/logout">LogOut</a></li>
+              <?php else : ?>
+                <li class="nav-item"><a class="nav-link" href="http://localhost/Proyecto_tienda_PHP/client/public/Usuarios/login">Login</a></li>
+            <?php endif;?>
+            
             <li class="nav-item"><a class="nav-link" href="#">
                 <svg class="bi" width="24" height="24">
                   <use xlink:href="#cart" />

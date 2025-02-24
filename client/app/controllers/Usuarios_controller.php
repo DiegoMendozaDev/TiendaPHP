@@ -37,26 +37,25 @@ class Usuarios_controller
         //$this->view->mostrar('usuarios/register.php', []);
     }
     public function iniciar_sesion(){
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $email = $_POST["email"];
-            $contraseña = $_POST["contrasena"];
-            require "../app/models/Usuarios_model.php";
-            $usuario_model = new Usuarios_model;
-            $comprobar = $usuario_model->iniciar_sesion($email, $contraseña);
-            $id = $usuario_model->idporemail($email);
-            if($comprobar == true){
-                session_start();
-                $_SESSION["email"] = $email;
-                $_SESSION["id"] = $id;
-                var_dump($_SESSION["email"]);
-                var_dump($_SESSION["id"]);
-            }else{
-                echo "Error al iniciar sesion";
+        
+            if($_SERVER["REQUEST_METHOD"] == "POST"){
+                $email = $_POST["email"];
+                $contraseña = $_POST["contrasena"];
+                require "../app/models/Usuarios_model.php";
+                $usuario_model = new Usuarios_model;
+                $comprobar = $usuario_model->iniciar_sesion($email, $contraseña);
+                $id = $usuario_model->idporemail($email);
+                if($comprobar == true){
+                    session_start();
+                    $_SESSION["email"] = $email;
+                    $_SESSION["id"] = $id;
+                    header("Location: http://localhost/Proyecto_tienda_PHP/client/public/productos/index");
+                }else{
+                    echo "Error al iniciar sesion";
+                }
             }
-           
-
-            
-        }
+        
+    
     }
     
 
@@ -65,5 +64,8 @@ class Usuarios_controller
         
         var_dump($_POST);
         // $this->view->mostrar('usuarios/register.php', $params);
+    }
+    public function logout(){
+        logout();
     }
 }
